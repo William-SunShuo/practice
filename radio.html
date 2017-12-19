@@ -3,14 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>RadioTest</title>
+
+    <style>
+        input[type=radio] {
+            width: 40px;
+            height: 40px;
+            margin: 10px;
+        }
+    </style>
+
 </head>
 <body>
 <div>
-    <label id="1"> <input type="radio" name="radioGroup" value="value1">value1</label>
+    <label> <input id="1" type="radio" name="radioGroup" value="value1" checked onchange="change(id)">value1</label>
     <br>
-    <label id="2"> <input type="radio" name="radioGroup" value="value2">value2</label>
+    <label> <input id="2" type="radio" name="radioGroup" value="value2" onchange="change(id)">value2</label>
     <br>
-    <label id="3"> <input type="radio" name="radioGroup" value="value3">value3</label>
+    <label> <input id="3" type="radio" name="radioGroup" value="value3" onchange="change(id)">value3</label>
 </div>
 </body>
+<script>
+    var nodeList = document.getElementsByName("radioGroup");
+    var printChecked = function () {
+        if (nodeList) {
+            nodeList.forEach(function (node) {
+                console.log("node:" + node.id, "---------checked:" + node.checked);
+            })
+        } else {
+            console.log("nodeList", "-------" + nodeList);
+        }
+    };
+    printChecked();
+    var change = function (id) {
+        console.log("onchange", "-------------" + id);
+        document.getElementById(id).style.margin = 50;
+        printChecked();
+    }
+</script>
 </html>
