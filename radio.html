@@ -36,7 +36,11 @@
     printChecked();
     var change = function (id) {
         console.log("onchange", "-------------" + id);
-        document.getElementById(id).style.margin = 50;
+        //document.getElementById(id).style.cssText = "margin:50px"; 第一种改变样式方法
+        document.getElementById(id).style.margin = "50px";//第二种方法
+//        document.getElementById(id).setAttribute("class", "style2");//第三种方法，改变类名，从而改变样式
+//        document.getElementById(id).className = "style2";//等价于第三种方法
+
         printChecked();
     }
 </script>
