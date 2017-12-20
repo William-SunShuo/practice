@@ -3,45 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>RadioTest</title>
-
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
     <style>
+        label {
+            display: block;
+        }
         input[type=radio] {
             width: 40px;
             height: 40px;
-            margin: 10px;
+            margin: 0;
         }
     </style>
 
 </head>
 <body>
-<div>
-    <label> <input id="1" type="radio" name="radioGroup" value="value1" checked onchange="change(id)">value1</label>
+<div ng-app="app" ng-controller="radioCtrl">
+    <label> <input id="{{values[0].id}}" type="radio" name="radioGroup" value="{{values[0].name}}" ng-model="myAnswer" ng-change="change()">{{values[0].name}}</label>
     <br>
-    <label> <input id="2" type="radio" name="radioGroup" value="value2" onchange="change(id)">value2</label>
+    <label> <input id="{{values[1].id}}" type="radio" name="radioGroup" value="{{values[1].name}}" ng-model="myAnswer" ng-change="change()">{{values[1].name}}</label>
     <br>
-    <label> <input id="3" type="radio" name="radioGroup" value="value3" onchange="change(id)">value3</label>
+    <label> <input id="{{values[2].id}}" type="radio" name="radioGroup" value="{{values[2].name}}" ng-model="myAnswer" ng-change="change()">{{values[2].name}}</label>
 </div>
 </body>
 <script>
-    var nodeList = document.getElementsByName("radioGroup");
-    var printChecked = function () {
-        if (nodeList) {
-            nodeList.forEach(function (node) {
-                console.log("node:" + node.id, "---------checked:" + node.checked);
-            })
-        } else {
-            console.log("nodeList", "-------" + nodeList);
-        }
-    };
-    printChecked();
-    var change = function (id) {
-        console.log("onchange", "-------------" + id);
-        //document.getElementById(id).style.cssText = "margin:50px"; 第一种改变样式方法
-        document.getElementById(id).style.margin = "50px";//第二种方法
-//        document.getElementById(id).setAttribute("class", "style2");//第三种方法，改变类名，从而改变样式
-//        document.getElementById(id).className = "style2";//等价于第三种方法
+    /**
+     * 该例证明了ng-model是双向绑定的，而ng-checked是单向绑定的，当ng-model绑定的变量的初始值（myAnswer）与该input的值相等时，该输入框会被默认选中
+     */
+    var app = angular.module('app', []);
+    app.controller('radioCtrl', function ($scope) {
+        $scope.values = [{id: "1", name: "Google"}, {id: "2", name: "Runoob"}, {
+            id: "3",
+            name: "Taobao"
+        }];
+        var nodeList = document.getElementsByName("radioGroup");
+        var printChecked = function () {
+            if (nodeList) {
+                nodeList.forEach(function (node) {
+                    console.log("node:" + node.id, "---------checked:" + node.checked);
+                })
+            } else {
+                console.log("nodeList", "-------" + nodeList);
+            }
+        };
+        $scope.myAnswer = "Taobao";
+        $scope.change = function () {
+            //document.getElementById(id).style.cssText = "margin:50px"; 第一种改变样式方法
+            //document.getElementById(id).style.margin = "50px";//第二种方法
+            //document.getElementById(id).setAttribute("class", "style2");//第三种方法，改变类名，从而改变样式
+            //document.getElementById(id).className = "style2";//等价于第三种方法
+            printChecked();
+            console.log($scope.myAnswer);
+        };
+    });
 
-        printChecked();
-    }
 </script>
 </html>
