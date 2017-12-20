@@ -18,11 +18,11 @@
 </head>
 <body>
 <div ng-app="app" ng-controller="radioCtrl">
-    <label> <input id="{{values[0].id}}" type="radio" name="radioGroup" value="{{values[0].name}}" ng-model="myAnswer" ng-change="change()">{{values[0].name}}</label>
+    <label> <input id="{{values[0].id}}" type="radio" name="radioGroup" ng-value="values[0].name" ng-model="myAnswer" ng-change="change()">{{values[0].name}}</label>
     <br>
-    <label> <input id="{{values[1].id}}" type="radio" name="radioGroup" value="{{values[1].name}}" ng-model="myAnswer" ng-change="change()">{{values[1].name}}</label>
+    <label> <input id="{{values[1].id}}" type="radio" name="radioGroup" ng-value="values[1].name" ng-model="myAnswer" ng-change="change()">{{values[1].name}}</label>
     <br>
-    <label> <input id="{{values[2].id}}" type="radio" name="radioGroup" value="{{values[2].name}}" ng-model="myAnswer" ng-change="change()">{{values[2].name}}</label>
+    <label> <input id="{{values[2].id}}" type="radio" name="radioGroup" ng-value="values[2].name" ng-model="myAnswer" ng-change="change()">{{values[2].name}}</label>
 </div>
 </body>
 <script>
