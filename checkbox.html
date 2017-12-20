@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RadioTest</title>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <style>
+        label {
+            display: block;
+        }
+
+        input[type=checkbox] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+        }
+    </style>
+
+</head>
+<body>
+<div ng-app="app" ng-controller="checkboxCtrl">
+    <label ng-repeat="value in values"> <input id="{{value.id}}" type="checkbox" ng-model="value.selected" ng-change="change(value)">{{value.name}}</label>
+</div>
+</body>
+<script>
+    var app = angular.module('app', []);
+    app.controller('checkboxCtrl', function ($scope) {
+        $scope.values = [{id: "1", name: "Google", selected: false}, {id: "2", name: "Runoob", selected: false}, {
+            id: "3",
+            name: "Taobao",
+            selected: false
+        }];
+        $scope.change = function (value) {
+            console.log("value.name:" + value.name, "value.selected:" + value.selected);
+        };
+    });
+
+</script>
+</html>
