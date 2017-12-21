@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .radio_normal {
+            width: 20px;
+            height: 20px;
+            border: solid 3px black;
+            border-radius: 100%;
+            padding: 5px;
+        }
+
+        .radio_selected {
+            width: 20px;
+            height: 20px;
+            border: solid 3px black;
+            border-radius: 100%;
+            padding: 5px;
+            background-color: black;
+            background-clip: content-box;
+        }
+    </style>
+
+    <script>
+        var changeStyle = function () {
+            var element = document.getElementById("radio");
+            if (element.className === "radio_normal") {
+                element.className = "radio_selected";
+            } else {
+                element.className = "radio_normal";
+            }
+        };
+    </script>
+</head>
+<body>
+
+<div id="radio" class="radio_normal" onclick="changeStyle()"></div>
+</body>
+</html>
