@@ -19,7 +19,15 @@
             border-radius: 100%;
             padding: 5px;
             background-color: black;
-            background-clip: content-box;
+            background-clip: content-box;//取三个值border-box/content-box/padding-box
+        }
+
+        .box-sizing{
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            background-color: red;
+            box-sizing:border-box;//取两个值border-box/content-box
         }
     </style>
 
@@ -37,5 +45,7 @@
 <body>
 
 <div id="radio" class="radio_normal" onclick="changeStyle()"></div>
+
+<div class="box-sizing">box-sizing</div>
 </body>
 </html>
