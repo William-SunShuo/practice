@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #line {
+        width: 700px;
+        height: 400px;
+    }
+</style>
+
+<body>
+<div id="line">
+</div>
+</body>
+<script src="echarts.min.js"></script>
+<script>
+    var element = document.getElementById("line");
+    var myChart = echarts.init(element);
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['12.11', '12.18', '12.26', '1.05', '1.12', '1.18', '1.26'],
+            boundaryGap: false
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            smooth: true,
+            areaStyle: {
+                normal: {
+                    color: '#BCEBD5'
+                }
+
+            },
+            lineStyle: {
+                normal: {color: '#21BD73'}
+            },
+            itemStyle: {
+                normal: {
+                    color: '#21BD73'
+                }
+            },
+            markPoint: {
+                symbol: 'image://pic_examtip.png',
+                symbolSize: [82, 33],
+                symbolOffset: [0, '50%'],
+                data: [
+                    {
+                        name: '某个屏幕坐标',
+                        value: 932,
+                        coord: ['12.18', 982],
+                        label: {
+                            position: 'top',
+                            color: '#fff'
+                        }
+                    }
+                ]
+            }
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</html>
