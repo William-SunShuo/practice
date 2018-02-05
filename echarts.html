@@ -6,8 +6,8 @@
 </head>
 <style>
     #line {
-        width: 700px;
-        height: 400px;
+        width: 600px;
+        height: 300px;
     }
 </style>
 
@@ -19,17 +19,58 @@
 <script>
     var element = document.getElementById("line");
     var myChart = echarts.init(element);
+    var paths = ['path://M6,26h16.207L27,34.301L31.793,26H48c3.3,0,6-2.701,6-6V6c0-3.301-2.7-6-6-6H6C2.7,0,0,2.7,0,6v14C0,23.299,2.7,26,6,26z', 'path://M48,8.302H31.793L27,0l-4.793,8.302H6c-3.3,0-6,2.7-6,6v14c0,3.3,2.7,6,6,6h42c3.3,0,6-2.7,6-6v-14C54,11.002,51.3,8.302,48,8.302z'];
     option = {
         xAxis: {
             type: 'category',
-            data: ['12.11', '12.18', '12.26', '1.05', '1.12', '1.18', '1.26'],
-            boundaryGap: false
+            data: ['12.11', '12.18', '12.26', '16.05', '19.12', '17.18','12.33','14.22','16.56','11.11', '17.18','12.33', '12.26', '16.05', '19.12', '17.18','12.33'],
+            boundaryGap: false,
+            axisLabel: {
+                color: '#999999',
+                fontSize:10
+                // rotate:20
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    // 使用深浅的间隔色
+                    color: '#eee',
+                    width: 0.5,
+                    type: 'solid'
+                }
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            triggerOn:'click',
+            backgroundColor:'#21BD73',
+            padding:[0,8],
+            position:function (point,params,dom,rect){
+                return [point[0]-8,point[1]-30];
+            },
+            formatter:function (params){
+                return params.value;
+            }
         },
         yAxis: {
             type: 'value'
         },
+        grid: {
+            top: 30,
+            bottom: 30,
+            left:30
+        },
+        dataZoom: [
+            {
+                type: 'inside',
+                start: 0,
+                end: 50,
+                zoomLock: false,
+                preventDefaultMouseMove:true
+            }
+        ],
         series: [{
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: [20, 32, 81, 94,90,30,20,100, 12, 71, 76, 90, 43, 25,40, 12, 71, 76],
             type: 'line',
             smooth: true,
             areaStyle: {
@@ -47,17 +88,22 @@
                 }
             },
             markPoint: {
-                symbol: 'image://pic_examtip.png',
-                symbolSize: [82, 33],
-                symbolOffset: [0, '50%'],
+                symbol: paths[1],
+                symbolSize: [30, 22],
+                symbolOffset: [0, '60%'],
+                itemStyle:{
+                    color:'#000'
+                },
                 data: [
                     {
                         name: '某个屏幕坐标',
-                        value: 932,
-                        coord: ['12.18', 982],
+                        value: '32名',
+                        coord: ['12.18', 32],
                         label: {
-                            position: 'top',
-                            color: '#fff'
+                            position:'insideBottom',
+                            distance:3,
+                            color: '#fff',
+                            fontSize:10
                         }
                     }
                 ]
