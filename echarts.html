@@ -10,24 +10,25 @@
         height: 300px;
     }
 </style>
-
 <body>
 <div id="line">
 </div>
 </body>
 <script src="echarts.min.js"></script>
 <script>
+    var pStart = 50;
+    var pEnd = 100;
     var element = document.getElementById("line");
     var myChart = echarts.init(element);
     var paths = ['path://M6,26h16.207L27,34.301L31.793,26H48c3.3,0,6-2.701,6-6V6c0-3.301-2.7-6-6-6H6C2.7,0,0,2.7,0,6v14C0,23.299,2.7,26,6,26z', 'path://M48,8.302H31.793L27,0l-4.793,8.302H6c-3.3,0-6,2.7-6,6v14c0,3.3,2.7,6,6,6h42c3.3,0,6-2.7,6-6v-14C54,11.002,51.3,8.302,48,8.302z'];
     option = {
         xAxis: {
             type: 'category',
-            data: ['12.11', '12.18', '12.26', '16.05', '19.12', '17.18','12.33','14.22','16.56','11.11', '17.18','12.33', '12.26', '16.05', '19.12', '17.18','12.33'],
+            data: ['12.11', '12.18', '12.26', '16.05', '19.12', '17.18', '12.33', '14.22', '16.56', '11.11'],
             boundaryGap: false,
             axisLabel: {
                 color: '#999999',
-                fontSize:10
+                fontSize: 10
                 // rotate:20
             },
             splitLine: {
@@ -41,14 +42,14 @@
             }
         },
         tooltip: {
-            trigger: 'item',
-            triggerOn:'click',
-            backgroundColor:'#21BD73',
-            padding:[0,8],
-            position:function (point,params,dom,rect){
-                return [point[0]-8,point[1]-30];
+            trigger: 'none',
+            triggerOn: 'click',
+            backgroundColor: '#21BD73',
+            padding: [0, 8],
+            position: function (point) {
+                return [point[0] - 8, point[1] - 30];
             },
-            formatter:function (params){
+            formatter: function (params) {
                 return params.value;
             }
         },
@@ -58,26 +59,25 @@
         grid: {
             top: 30,
             bottom: 30,
-            left:30
+            left: 30
         },
         dataZoom: [
             {
                 type: 'inside',
-                start: 0,
-                end: 50,
+                start: pStart,
+                end: pEnd,
                 zoomLock: false,
-                preventDefaultMouseMove:true
+                preventDefaultMouseMove: true
             }
         ],
         series: [{
-            data: [20, 32, 81, 94,90,30,20,100, 12, 71, 76, 90, 43, 25,40, 12, 71, 76],
+            data: [20, 32, 81, 94, 90, 30, 20, 100, 12, 71],
             type: 'line',
             smooth: true,
             areaStyle: {
                 normal: {
                     color: '#BCEBD5'
                 }
-
             },
             lineStyle: {
                 normal: {color: '#21BD73'}
@@ -88,28 +88,78 @@
                 }
             },
             markPoint: {
-                symbol: paths[1],
-                symbolSize: [30, 22],
-                symbolOffset: [0, '60%'],
-                itemStyle:{
-                    color:'#000'
-                },
                 data: [
                     {
+                        symbol: paths[1],
+                        symbolSize: [30, 22],
+                        symbolOffset: [0, '60%'],
+                        itemStyle: {
+                            color: '#000'
+                        },
                         name: '某个屏幕坐标',
                         value: '32名',
                         coord: ['12.18', 32],
                         label: {
-                            position:'insideBottom',
-                            distance:3,
+                            position: 'insideBottom',
+                            distance: 3,
                             color: '#fff',
-                            fontSize:10
+                            fontSize: 10
                         }
                     }
                 ]
             }
-        }]
+        }],
+        graphic: {
+            type: 'image',
+            right: 30,
+            top: 120,
+            z: 5,
+            style: {
+                image: 'pic_guide.png',
+                width: 140,
+                height: 102,
+                opacity: 1
+            }
+        }
     };
     myChart.setOption(option);
+    myChart.on("dataZoom", function (param) {
+        pStart = param.batch[0].start;
+        pEnd = param.batch[0].end;
+        if (option.graphic.style.opacity) {
+            option.graphic.style.opacity = 0;
+            myChart.setOption(option);
+        }
+    });
+    myChart.on('click', function (params) {
+        if (params.componentType === 'series') {
+            option.dataZoom[0].start = pStart;
+            option.dataZoom[0].end = pEnd;
+            option.series[0].markPoint.data.push({
+                symbol: paths[0],
+                symbolSize: [30, 22],
+                symbolOffset: [0, '-60%'],
+                itemStyle: {
+                    color: '#000'
+                },
+                name: '某个屏幕坐标',
+                value: params.value + "名",
+                coord: [params.name, params.value],
+                label: {
+                    position: 'insideTop',
+                    distance: 3,
+                    color: '#fff',
+                    fontSize: 10
+                }
+            });
+            myChart.setOption(option);
+            setTimeout(function () {
+                option.dataZoom[0].start = pStart;
+                option.dataZoom[0].end = pEnd;
+                option.series[0].markPoint.data.length = 1;
+                myChart.setOption(option);
+            }, 2000);
+        }
+    });
 </script>
 </html>
