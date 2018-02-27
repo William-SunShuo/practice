@@ -135,7 +135,9 @@
         if (params.componentType === 'series') {
             option.dataZoom[0].start = pStart;
             option.dataZoom[0].end = pEnd;
+            var  id = new Date().getTime();
             option.series[0].markPoint.data.push({
+                id: id,
                 symbol: paths[0],
                 symbolSize: [30, 22],
                 symbolOffset: [0, '-60%'],
@@ -156,7 +158,13 @@
             setTimeout(function () {
                 option.dataZoom[0].start = pStart;
                 option.dataZoom[0].end = pEnd;
-                option.series[0].markPoint.data.length = 1;
+                for (var i = 0; i < option.series[0].markPoint.data.length; i++) {
+                    if (option.series[0].markPoint.data[i].id === id) {
+                        option.series[0].markPoint.data.splice(i, 1);
+                        i = undefined;
+                        break;
+                    }
+                }
                 myChart.setOption(option);
             }, 2000);
         }
