@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var there = "there";
+        var There = there.replace(/^the/, 'The');//替换以the开头的字符串
+        console.log(There);
+        var str1 = "Beauty lies in lover's eyes,yes?";//替换以eyes结尾的字符串
+        var str2 = str1.replace(/eyes$/, 'EYES');
+        console.log(str2);
+        var str3 = "A notice on the wall,please notice";
+        var str4 = str3.replace(/notice/g,"Notice");
+        console.log(str4);
+        /**
+         *         *   {0,}
+         *         +   {1,}
+         *         ?   {0,1}
+         *         | 或 （hi¦hello）表示一个字符串里有"hi"或者"hello"；
+         *         . 可以替代任何字符 ，"a.[0-9]"：表示一个字符串有一个"a"后面跟着一个任意字符和一个数字；"[ab]"：表示一个字符串有一个"a"或"b"（相当于"a¦b"）；
+         *         你也可以在方括号里用'^'表示不希望出现的字符，'^'应在方括号里的第一位。如："%[^a-zA-Z]%"表示两个百分号中不应该出现字母
+         *         \w：用于匹配字母，数字或下划线字符
+         *         \d：用于匹配从0到9的数字
+         */
+        function regx(r,s)
+        {
+            if (r == null || r == ""){
+                return false;
+            }
+            var patrn= new RegExp(r);
+            if (patrn.exec(s))
+                return true;
+            return false
+        }
+        console.log(regx(/^[\u4E00-\u9FA5]+$/,"你好吗"));//匹配中文
+
+
+
+    </script>
+</head>
+<body>
+
+<div>
+    <div style="margin-top: 100px">this is test</div>
+</div>
+</body>
+</html>

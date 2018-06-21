@@ -23,9 +23,41 @@
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
       }*/
+    .box-transition {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        transition: background-color 1s, width 1s;
+    }
+
+    .box-transition:hover {
+        background-color: red;
+        width: 200px;
+    }
+
+    .box-animation {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        animation: bg-change 1s ease-in forwards;
+    }
+
+    @keyframes bg-change {
+        40% {
+            background-color: red;
+        }
+        70% {
+            background-color: blue;
+        }
+    }
+
+
 </style>
 <body>
 <p>
-    拉近了发动机拉上来的啦阿拉斯加来打发时间浪费掉爱是理解对方拉丝机老地方阿斯兰的房间辣手机费德勒按理说地方拉近了发动机拉上来的啦阿拉斯加来打发时间浪费掉爱是理解对方拉丝机老地方阿斯兰的房间辣手机费德勒按理说地方拉近了发动机拉上来的啦阿拉斯加来打发时间浪费掉爱是理解对方拉丝机老地方阿斯兰的房间辣手机费德勒按理说地方</p>
+    拉近了发动机拉上来的啦阿拉斯加来打发时间动掉爱是理解对方拉丝机老地方阿斯兰的房间辣手机费德勒按理说地方拉近了发动机拉上来的啦阿拉斯加来打发时间浪费掉爱是理解对方拉丝机老地方阿斯兰的房间辣手机费德勒按理说地方
+</p>
+<div class="box-transition"></div>
+<div class="box-animation"></div>
 </body>
 </html>

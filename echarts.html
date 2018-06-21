@@ -14,7 +14,7 @@
 <div id="line">
 </div>
 </body>
-<script src="echarts.min.js"></script>
+<script src="lib/echarts/echarts.min.js"></script>
 <script>
     var pStart = 50;
     var pEnd = 100;
@@ -22,6 +22,18 @@
     var myChart = echarts.init(element);
     var paths = ['path://M6,26h16.207L27,34.301L31.793,26H48c3.3,0,6-2.701,6-6V6c0-3.301-2.7-6-6-6H6C2.7,0,0,2.7,0,6v14C0,23.299,2.7,26,6,26z', 'path://M48,8.302H31.793L27,0l-4.793,8.302H6c-3.3,0-6,2.7-6,6v14c0,3.3,2.7,6,6,6h42c3.3,0,6-2.7,6-6v-14C54,11.002,51.3,8.302,48,8.302z'];
     option = {
+        title: {
+            text: '折线图堆叠'
+        },
+        legend:{
+            left:200,
+            type:'scroll',
+            width:'80%',
+            data:['a','b','c','d'],
+            formatter: function (name) {
+                return name.substring(0,10)+ '...';
+            }
+        },
         xAxis: {
             type: 'category',
             data: ['12.11', '12.18', '12.26', '16.05', '19.12', '17.18', '12.33', '14.22', '16.56', '11.11'],
@@ -41,23 +53,23 @@
                 }
             }
         },
-        tooltip: {
-            trigger: 'none',
-            triggerOn: 'click',
-            backgroundColor: '#21BD73',
-            padding: [0, 8],
-            position: function (point) {
-                return [point[0] - 8, point[1] - 30];
-            },
-            formatter: function (params) {
-                return params.value;
-            }
-        },
+//        tooltip: {
+//            trigger: 'none',
+//            triggerOn: 'click',
+//            backgroundColor: '#21BD73',
+//            padding: [0, 8],
+//            position: function (point) {
+//                return [point[0] - 8, point[1] - 30];
+//            },
+//            formatter: function (params) {
+//                return params.value;
+//            }
+//        },
         yAxis: {
             type: 'value'
         },
         grid: {
-            top: 30,
+            top: 50,
             bottom: 30,
             left: 30
         },
@@ -71,6 +83,7 @@
             }
         ],
         series: [{
+            name:'a',
             data: [20, 32, 81, 94, 90, 30, 20, 100, 12, 71],
             type: 'line',
             smooth: true,
@@ -124,12 +137,25 @@
     };
     myChart.setOption(option);
     myChart.on("dataZoom", function (param) {
+//        console.log("dataZoom");
         pStart = param.batch[0].start;
         pEnd = param.batch[0].end;
+//        if(pStart < 20 && pStart >10){
+//            console.log('到头了', "pStart:" + pStart + "---pEnd:" + pEnd);
+//            option.dataZoom[0].start = pStart;
+//            option.dataZoom[0].end = pEnd;
+//            option.dataZoom[0].preventDefaultMouseMove = true;
+//            myChart.setOption(option);
+//        }else {
+//
+//        }
         if (option.graphic.style.opacity) {
             option.graphic.style.opacity = 0;
             myChart.setOption(option);
         }
+    });
+    myChart.on('mousedown',function () {
+        console.log("mousedown");
     });
     myChart.on('click', function (params) {
         if (params.componentType === 'series') {

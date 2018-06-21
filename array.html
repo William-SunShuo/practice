@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+         var arr = [];
+         arr.push("a");
+         arr.push("b");
+         console.log("arr.length:",arr.length);//2
+         var brr = ["c","d"];
+         arr.push(brr);
+         console.log("arr.length:",arr.length);//3
+         arr.length = 1;
+         arr.forEach(function (item) {
+             console.log(item + "---  ")
+         });
+         var crr = ["e","f"];
+         console.log("--",arr.concat(crr).length);//3
+         console.log("arr.length:",arr.length);//1
+         var t = arr.pop();
+         console.log("arr.length:",arr.length);//0
+         console.log("t:",t);//a
+         t = arr.pop();
+         console.log("t:",t);//undefined
+         var pt = brr.shift();
+         console.log("pt:",pt);//c
+         brr.unshift("g");
+         console.log("brr.length:",brr.length);//2
+
+         var drr = ["1", "2", "a", "4", "5", "a", "6"];
+         console.log(drr.lastIndexOf("a", 3));//2，从"4"开始向前找
+         var err = drr.slice(1,3);
+         console.log('drr',drr);
+         console.log('err',err);
+         drr.splice(2,1);
+         console.log('drr',drr);
+
+
+         var add = function (a,b) {
+             return a+b;
+         };
+         var value = 3;
+         var object = {value:1};
+         object.double = function () {
+             var that = this;
+             var helper = function () {
+                 that.value = add(that.value,that.value);
+             };
+             helper();//绑定到全局对象
+             console.log("value = ",this.value);
+         };
+         object.double();
+
+        var Quo = function (string) {
+            this.status = string;
+        };
+        Quo.prototype.get_status = function () {
+          return this.status;
+        };
+        var myQuo = new Quo('confused');
+        console.log(myQuo.get_status());
+        var statusObject = {
+            status:'OK'
+        };
+        console.log(Quo.prototype.get_status.apply(statusObject));//OK
+
+         var sum = function () {
+             var i, sum = 0;
+             for (i = 0; i < arguments.length; i++) {
+                 sum += arguments[i];
+             }
+             return sum;
+         };
+         console.log(sum(1, 2, 3, 4, 5));
+
+         //exceptions
+         var add1 = function (a,b) {
+             if(typeof a !=='number'|| typeof b !=='number'){
+                 throw {
+                     name:'TypeError',
+                     message:'add needs numbers'
+                 };
+             }
+             return a+b;
+         };
+
+         var try_it = function () {
+             try{
+                 add1("seven")
+             }catch (e){
+                 console.log(e.name+":"+e.message);
+             }
+         };
+         try_it();
+
+         Function.prototype.method =  function (name,func) {
+             this.prototype[name] = func;
+             return this;
+         };
+         Number.method('integer',function () {
+            console.log("integer",'method');
+         });
+
+         localStorage.setItem("name",'ss');
+         console.log(localStorage.getItem("name"));
+         localStorage.setItem("name",undefined);
+         console.log(localStorage.getItem("name"));
+         localStorage.setItem("age",20);
+         setTimeout(function () {
+             localStorage.clear();
+         },1000);
+
+         var a = [{name:"ss"}];
+         var b = [];
+         b.push(a[0]);
+         b[0].name = "sun";
+         console.log(a[0].name);
+    </script>
+    <style>
+
+        input,textarea {
+            font-size: 24px;
+            padding: 10px;
+            color: red;
+            text-shadow: 0px 0px 0px #000;
+            -webkit-text-fill-color: transparent;
+            word-wrap: break-word;
+        }
+        input::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder{
+            color:blue;
+            padding-left: 10px;
+            text-shadow: none; -webkit-text-fill-color: initial; }
+
+        div {
+            width:200px;
+            height: 200px;
+            line-height: 200px;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+<!--<form>
+    <input type="search" placeholder="请输入测评<br/>的内容">
+</form>-->
+<div><span>A</span> <img style='vertical-align:middle;border: solid 2px black;padding: 5px;margin-left: 10px' src="btn_chose_normal.png" width="150" height="150"></div>
+</body>
+</html>

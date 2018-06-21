@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>RadioTest</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
     <style>
         label {
@@ -14,17 +15,50 @@
             height: 20px;
             margin: 0;
         }
+        .square{
+            animation: rotate 2s infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform-origin: 0 0;
+                transform: rotate(0deg);
+            }
+            100% {
+                transform-origin: 0 0;
+                transform: rotate(360deg);
+            }
+        }
     </style>
 
 </head>
 <body>
 <div ng-app="app" ng-controller="checkboxCtrl">
     <label ng-repeat="value in values"> <input id="{{value.id}}" type="checkbox" ng-model="value.selected" ng-change="change(value)">{{value.name}}</label>
+    <input type="checkbox" ng-model = "show" ng-true-value = "true" ng-false-value = "false">
+    <input type="checkbox" ng-model = "va" ng-true-value = "123" ng-false-value = "456">
+    <run ng-if = "show" value = "ab{{va}}">显示</run>
+    <div ng-bind = "va"></div>
 </div>
+
+<span class="square">square</span>
 </body>
 <script>
     var app = angular.module('app', []);
-    app.controller('checkboxCtrl', function ($scope) {
+    app.directive("run", function($compile) {
+        return {
+            restrict : "A",
+            template : "<h1>自定义指令!</h1>",
+            replace:true,
+            scope: {
+                value:'@'
+            },
+            controller:function () {
+                console.log(value);
+            }
+        };
+    });
+    app.controller('checkboxCtrl', function ($scope,$timeout,$interval) {
         $scope.values = [{id: "1", name: "Google", selected: false}, {id: "2", name: "Runoob", selected: false}, {
             id: "3",
             name: "Taobao",
@@ -33,7 +67,46 @@
         $scope.change = function (value) {
             console.log("value.name:" + value.name, "value.selected:" + value.selected);
         };
+
+        $scope.va = "abc";
+        var timer = setInterval(function () {
+            console.log("-----------",'aa');
+        },1000);
+
+
+        $timeout(function () {
+            var cleared = clearInterval(timer);
+            console.log('cleared:',cleared);
+        },5000);
+
+        var a = 0;
+        $timeout(function () {
+          a++;
+        },5000);
+
+        $timeout(function () {
+            a++;
+        },3000);
+        $timeout(function () {
+            a++;
+        },2000);
+        $timeout(function () {
+            a++;
+        },4000);
+
+        $timeout(function () {
+            a = a+2;
+        },6000);
+
+
+        $timeout(function () {
+            console.log(a);
+        },10000);
     });
+
+    var str = "200年12月3日";
+    str = str.replace(/年|月/g,"-").replace(/日/g,"");
+    console.log(str);
 
 </script>
 </html>

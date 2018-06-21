@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #parent div {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            overflow: scroll;
+            text-wrap: normal;
+            word-wrap: break-word;
+        }
+
+        #block {
+            -webkit-animation-duration: 3s;
+            /*-webkit-animation-iteration-count: infinite;*/
+        }
+    </style>
+    <script src="lib/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/css/animate.css">
+
+</head>
+<body>
+<div id="parent">
+    <div id="box">
+        jdslakdjjjjjjjjjjjjjjjjjjjjjdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjdlkajfdlkjflkjsalfjlksajldkj
+    </div>
+    <div>
+        skjdljlsajflksajlfjsaljflsajflsjlfjslajsdlkjlksdjlksdjlkfsjlfsdjlkajlkfjslkjflksajlfjsalfjlkdsjlfdsj
+    </div>
+
+    <div id= "block"></div>
+</div>
+</body>
+
+<script>
+    var box = document.getElementById("box");
+    //    box.addEventListener("click",function () {
+    //        console.log(this.parentNode.parentNode);
+    //        console.log("click div");
+    //    },false);
+    //    document.body.addEventListener("click",function () {
+    //        console.log("click body");
+    //    },false);
+
+    document.addEventListener("scroll", function () {
+        console.log("scroll----document");
+//        event.stopPropagation();
+    }, true);
+    box.parentNode.addEventListener("scroll", function () {
+        console.log("scroll----parent");
+        event.stopPropagation();
+    }, true);
+    box.addEventListener("scroll", function () {
+        console.log("scroll---son");
+    }, true);
+    
+    $("#block").click(function () {
+        $(this).addClass('animated shake');
+    });
+    $('#block').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function () {
+        alert('animationend');
+    });
+</script>
+</html>
