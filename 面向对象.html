@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+
+<script>
+    //封装encapsulation
+    function Person(name) {
+        var name = name;//私有属性，不能通过.name访问
+        this.getName = function () {
+            return name;
+        }
+    }
+    Person.prototype.myName = function() {
+        console.log(this.name);
+    };
+    var william = new Person("william");
+    console.log(william.name);//undefined
+    console.log(william.getName());//william
+    william.myName();//undefined  其实这也印证了：闭包就是函数里面包函数，由于prototype是通过函数名，指到其他内存空间独立的函数体，因此没法取得闭包的作用域变量。
+
+    //继承
+    //一、 构造函数绑定
+    function Animal(){
+        this.species = '动物';
+    }
+    function Cat(name,color){
+//        Animal.apply(this);
+        this.name = name;
+        this.color = color;
+    }
+
+    var cat1 = new Cat("大毛","黄色");
+    alert(cat1.species); // 动物
+
+    //二、 prototype模式
+    Cat.prototype = new Animal();
+    Cat.prototype.constructor = Cat;
+    var cat2 = new Cat("大毛","黄色");
+    alert(cat2.species); // 动物
+
+    //Javascript规定，每一个构造函数都有一个prototype属性，指向另一个对象。这个对象的所有属性和方法，都会被构造函数的实例继承。
+
+//    function Cat(name,color){
+//        this.name = name;
+//        this.color = color;
+//    }
+//
+//    Cat.prototype.type = "猫科动物";
+//    Cat.prototype.eat = function () {
+//        alert("吃老鼠")
+//    };
+//    var cat1 = new Cat("大毛","黄色");
+//    var cat2 = new Cat("二毛","黑色");
+//    alert(cat1.type); // 猫科动物
+//    cat1.eat(); // 吃老鼠
+//    alert(cat1.eat === cat2.eat); //true
+//    //isPrototypeOf()这个方法用来判断，某个proptotype对象和某个实例之间的关系。
+//    alert(Cat.prototype.isPrototypeOf(cat1)); //true
+//    alert(Cat.prototype.isPrototypeOf(cat2)); //true
+//
+//    //每个实例对象都有一个hasOwnProperty()方法，用来判断某一个属性到底是本地属性，还是继承自prototype对象的属性
+//    alert(cat1.hasOwnProperty("name")); // true
+//    alert(cat1.hasOwnProperty("type")); // false
+//
+//    //in运算符可以用来判断，某个实例是否含有某个属性，不管是不是本地属性。
+//    alert("name" in cat1); // true
+//    alert("type" in cat1); // true
+//    //in运算符还可以用来遍历某个对象的所有属性。
+//    for(var prop in cat1) { alert("cat1["+prop+"]="+cat1[prop]); }
+
+</script>
+</html>
