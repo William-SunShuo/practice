@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性盒子</title>
+</head>
+<style>
+    /*
+       flex-direction
+       flex-direction 属性指定了弹性子元素在父容器中的位置。
+       flex-direction: row | row-reverse | column | column-reverse
+
+       justify-content 属性
+       内容对齐（justify-content）属性应用在弹性容器上，把弹性项沿着弹性容器的主轴线（main axis）对齐。
+       justify-content 语法如下：
+       justify-content: flex-start | flex-end | center | space-between | space-around
+
+       align-items 属性
+       align-items 设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。
+       align-items: flex-start | flex-end | center | baseline | stretch
+
+       flex-wrap 属性
+       flex-wrap 属性用于指定弹性盒子的子元素换行方式。
+       flex-wrap: nowrap|wrap|wrap-reverse|initial|inherit;
+
+       align-content 属性
+       align-content 属性用于修改 flex-wrap 属性的行为。类似于 align-items, 但它不是设置弹性子元素的对齐，而是设置各个行的对齐。stretch - 默认。各行将会伸展以占用剩余的空间。
+       align-content: flex-start | flex-end | center | space-between | space-around | stretch
+
+       align-self
+       align-self 属性用于设置弹性元素自身在侧轴（纵轴）方向上的对齐方式。如果'align-self'的值为'auto'，则其计算值为元素的父元素的'align-items'值，如果其没有父元素，则计算值为'stretch'。
+       align-self: auto | flex-start | flex-end | center | baseline | stretch
+
+       flex
+       flex 属性用于指定弹性子元素如何分配空间。
+       flex: auto | initial | none | inherit |  [ flex-grow ] || [ flex-shrink ] || [ flex-basis ]
+
+     */
+    .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        justify-content: center;
+        width: 400px;
+        height: 250px;
+        background-color: lightgrey;
+    }
+
+    .flex-item {
+        background-color: cornflowerblue;
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+    }
+</style>
+<body>
+<div class="flex-container">
+    <div class="flex-item">flex item 1</div>
+    <div class="flex-item">flex item 2</div>
+    <div class="flex-item">flex item 3</div>
+</div>
+</body>
+</html>
