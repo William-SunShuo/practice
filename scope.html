@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域</title>
+</head>
+<body>
+</body>
+<script>
+    var scope = "global";
+    function fun() {
+        console.log(scope);//result:undefined
+        var scope = "local";
+        console.log(scope);//result:local;
+    }
+    fun();
+
+    //只要函数内定义了一个局部变量，函数在解析的时候都会将这个变量“提前声明”：
+    //    var scope = "global";
+    //    function fun(){
+    //        var scope;//提前声明了局部变量
+    //        console.log(scope);//result:undefined
+    //        scope = "local";
+    //        console.log(scope);//result:local;
+    //    }
+
+    function outer() {
+        var result = [];
+        for (var i = 0; i < 2; i++) {//注：i是outer()的局部变量
+            result[i] = function () {
+                return i;
+            }
+        }
+        return result;//返回一个函数对象数组
+        //这个时候会初始化result.length个关于内部函数的作用域链
+    }
+    var fn = outer();
+    console.log(fn[0]());//result：2
+    console.log(fn[1]());//result：2
+
+</script>
+</html>
