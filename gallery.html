@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .html{
+            font-size: 30px;
+        }
+        .gallery img {
+            margin: 30px;
+            width: calc((100% - 256px) / 4);
+        }
+
+        .flex-box{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+        }
+
+        .flex-box img {
+            width: calc(25% - 60px);
+            height: calc((50% - 120px) / 3);
+        }
+    </style>
+</head>
+<body>
+<div class="gallery">
+
+    <img src="ac.png">
+
+    <img src="ac.png">
+
+    <img src="ac.png">
+
+    <img src="ac.png">
+</div>
+
+<div class="flex-box">
+
+    <img src="ac.png">
+
+    <img src="ac.png">
+
+    <img src="ac.png">
+
+    <img src="ac.png">
+
+</div>
+
+<div style="width: 3rem;height: 2rem;background-color: green">this is a div</div>
+</body>
+<script>
+    var a = [];
+    a.push(1, 2, 3);
+    console.log(a.length);
+    var c = a.concat(4, 5, 6);
+    console.log(c.length);
+    var d = a.slice(-3, 2);
+    console.log(d);
+
+    var fun = function f2(num) {
+        if (num === 1) {
+            return 1;
+        }
+        return num * f2(num - 1);
+    };
+
+    var fun1 = fun;
+    fun = null;
+    console.log("f(5):", fun1(5));
+
+</script>
+</html>
