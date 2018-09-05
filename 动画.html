@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--
+animation-timing-function
+
+linear：线性过渡。等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0)
+ease：平滑过渡。等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0)
+ease-in：由慢到快。等同于贝塞尔曲线(0.42, 0, 1.0, 1.0)
+ease-out：由快到慢。等同于贝塞尔曲线(0, 0, 0.58, 1.0)
+ease-in-out：由慢到快再到慢。等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)
+step-start：等同于 steps(1, start)
+step-end：等同于 steps(1, end)
+steps(<integer>[, [ start | end ] ]?)：接受两个参数的步进函数。第一个参数必须为正整数，指定函数的步数。第二个参数取值可以是start或end，指定每一步的值发生变化的时间点。第二个参数是可选的，默认值为end。
+    cubic-bezier(<number>, <number>, <number>, <number>)：特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内
+
+animation-direction
+
+normal：正常方向
+reverse：反方向运行
+alternate：动画先正常运行再反方向运行，并持续交替运行
+alternate-reverse：动画先反运行再正方向运行，并持续交替运行
+
+animation-fill-mode
+
+即动画完成时，是显示动画开始的状态还是结束时的状态。
+
+none：默认值。不设置对象动画之外的状态
+forwards：设置对象状态为动画结束时的状态
+backwards：设置对象状态为动画开始时的状态
+both：设置对象状态为动画结束或开始的状态
+
+这个地方需要特别注意的是，如果steps(1,end)这样的模式，按照下文所讲，100%处可以为空，不影响动画，但是如果animation-fill-mode设置为forwards时，动画完毕显示的是最后一帧就会出问题。这时需要设置最后两个区间为一样的效果。
+-->
+<style>
+    #b {
+        width: 64px;
+        height: 56px;
+        background-color: white;
+        animation: bg 3s steps(1, start) infinite;
+        margin: 30px;
+    }
+
+    @keyframes bg {
+        0% {
+            background-image: url('btn_biaozhun_active1.png');
+        }
+        33.3% {
+            background-image: url('btn_biaozhun_active2.png');
+        }
+        66.6% {
+            background-image: url('btn_biaozhun_active3.png');
+        }
+        100% {
+            background-image: url('btn_biaozhun_active1.png');
+        }
+    }
+</style>
+<body>
+<div id="b"></div>
+</body>
+</html>
