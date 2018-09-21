@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="250" style="border:1px solid black;">
+</canvas>
+<script>
+    window.onload = function () {
+        // 通过ID获取DOM中canvas元素
+        var canvas = document.getElementById("myCanvas");
+        // 使用画布对象的getContext()方法声明一个2D上下文
+        var context = canvas.getContext("2d");
+        context.font = "40pt Calibri";
+        context.fillStyle = "black";
+        context.textAlign = "center"; // 水平居中
+        context.textBaseline = "middle"; // 垂直居中
+        context.fillText("Hello World!", canvas.width / 2, 125);
+//        // 设置线条宽度为2像素
+        context.lineWidth = 2;
+//        // 设置线条颜色为蓝色
+        context.strokeStyle = "blue";
+        // 通过描边颜色让线条可见
+        context.strokeText("Hello World!", canvas.width / 2, canvas.height / 2);
+    };
+
+    function drawBranches(context, startX, startY, trunkWidth, level) {
+        if (level < 12)  {
+            var changeX  =  100  /  (level  +  1);
+            var changeY  =  200  /  (level  +  1);
+            var topRightX = startX  + Math.random()  * changeX;
+            var topRightY = startY  - Math.random()  * changeY;
+            var topLeftX  = startX  - Math.random()  * changeX;
+            var topLeftY  = startY  - Math.random()  * changeY;
+            //绘制右侧树枝
+            context.beginPath();
+            context.moveTo(startX  + trunkWidth  /  4, startY);
+            context.quadraticCurveTo(startX + trunkWidth / 4, startY - trunkWidth, topRightX, topRightY);
+            context.lineWidth  = trunkWidth; context.lineCap  = "round";
+            context.stroke();
+            //绘制左侧树枝
+            context.beginPath();
+            context.moveTo(startX  - trunkWidth  /  4, startY);
+            context.quadraticCurveTo(startX - trunkWidth / 4, startY - trunkWidth, topLeftX, topLeftY);
+            context.lineWidth  = trunkWidth;
+            context.lineCap  = "round";
+            context.stroke();
+            drawBranches(context, topRightX, topRightY, trunkWidth * 0.7, level + 1);
+            drawBranches(context, topLeftX, topLeftY, trunkWidth * 0.7, level  +  1);
+        }
+    }
+</script>
+</body>
+</html>
