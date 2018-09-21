@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="250" style="border:1px solid black;">
+</canvas>
+<script>
+    window.onload = function () {
+        // 通过ID获取DOM中canvas元素
+        var canvas = document.getElementById("myCanvas");
+        // 使用画布对象的getContext()方法声明一个2D上下文
+        var context = canvas.getContext("2d");
+        var radial = context.createRadialGradient(60,60,20,114,114,50);
+        radial.addColorStop(0,'#EE8');
+        radial.addColorStop(0.4,'#FF0188');  // 颜色值 #FF0188 == rgba(255,1,136,1)
+        radial.addColorStop(1,'rgba(255,0,0)');
+        context.fillStyle = radial;
+        context.rect(0,0,200,200);
+        context.fill();
+        context.moveTo(80,60);
+        context.arc(60,60,20,0,2*Math.PI,false);
+        context.moveTo(164,114);
+        context.arc(114,114,50,0,2*Math.PI,false);
+        context.strokeStyle = "black";
+        context.stroke();
+
+    }
+</script>
+</body>
+</html>
