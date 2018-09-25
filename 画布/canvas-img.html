@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="250" style="border:1px solid black;">
+</canvas>
+<script>
+    /**
+     * imageObj是image对象，destX 和 destY是我们要放置图像的位置。
+     * context.drawImage(imageObj,destX,destY);
+     * destWidth 和 destHeight，来定义图像的尺寸:
+     * context.drawImage(imageObj,destX,destY,destWidth,destHeight);
+     */
+    window.onload = function () {
+        // 通过ID获取DOM中canvas元素
+        var canvas = document.getElementById("myCanvas");
+        // 使用画布对象的getContext()方法声明一个2D上下文
+        var context = canvas.getContext("2d");
+        var imgObj = new Image();
+        imgObj.onload = function () {
+            var destX = canvas.width / 2 - this.width / 2;
+            var destY = canvas.height / 2 - this.height / 2;
+            context.drawImage(this, destX, destY);
+        };
+        imgObj.src = "../pic_guide.png";
+    }
+</script>
+</body>
+</html>

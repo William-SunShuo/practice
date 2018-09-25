@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="250" style="border:1px solid black;">
+</canvas>
+<script>
+    /**
+     * 裁剪图像
+     * Context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHight, sourceHeight, sourceHeight, destX, destY, destWidth, destHeight);
+     */
+    window.onload = function () {
+        // 通过ID获取DOM中canvas元素
+        var canvas = document.getElementById("myCanvas");
+        // 使用画布对象的getContext()方法声明一个2D上下文
+        var context = canvas.getContext("2d");
+        var imgObj = new Image();
+        imgObj.onload = function () {
+            var width = this.width;
+            var height = this.height;
+            var destX = canvas.width / 2 - this.width / 2;
+            var destY = canvas.height / 2 - this.height / 2;
+            context.drawImage(this, 0, 0, width, height, destX, destY, width, height);
+        };
+        imgObj.src = "../pic_guide.png";
+    }
+</script>
+</body>
+</html>
